@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "907884689510",
+    "firebase_url": "https://eskul-b078e-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "eskul-b078e",
+    "storage_bucket": "eskul-b078e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:907884689510:android:49a69a6cc531d3c33c15a7",
+        "android_client_info": {
+          "package_name": "com.example.ekskul"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "907884689510-g2qggu9jhu3mudusqhuu5lkqkvgcdfvt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ekskul",
+            "certificate_hash": "d5bbf43430fffe22e8540cd8184ca7ef7dc079f3"
+          }
+        },
+        {
+          "client_id": "907884689510-0misjdsts3vme1cml0t5bpgbovgbjf1f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgIaQ-jAOMK-2iEFk01Olltzz1nhTJ5Xs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "907884689510-0misjdsts3vme1cml0t5bpgbovgbjf1f.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "907884689510-c88jivrvf0qd5vq8jt67naa511knkfpd.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.ekskul"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
