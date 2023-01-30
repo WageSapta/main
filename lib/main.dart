@@ -1,22 +1,28 @@
-import 'package:ekskul/provider/announcement_provider.dart';
-import 'package:ekskul/provider/auth_provider_class.dart';
-import 'package:ekskul/provider/ekstra_provider_class.dart';
-import 'package:ekskul/provider/location_provider.dart';
-import 'package:ekskul/provider/presenst_provider_class.dart';
-import 'package:ekskul/provider/user_provider_class.dart';
+import 'package:ekskul/constant/color.dart';
+import 'package:ekskul/firebase_options.dart';
+import 'package:ekskul/pembina/provider/announcement_provider.dart';
+import 'package:ekskul/pembina/provider/auth_provider_class.dart';
+import 'package:ekskul/pembina/provider/ekstra_provider_class.dart';
+import 'package:ekskul/pembina/provider/location_provider.dart';
+import 'package:ekskul/pembina/provider/members_provider_class..dart';
+import 'package:ekskul/pembina/provider/pembina_provider_class.dart';
+import 'package:ekskul/pembina/provider/presenst_provider_class.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 import 'splash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-
-
 AndroidNotificationChannel? channel;
 FlutterLocalNotificationsPlugin? flutterLocalNotificationsPlugin;
 
-void main() async {
-    runApp(MultiProvider(
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  runApp(MultiProvider(
     providers: providers,
     child: const MyApp(),
   ));
@@ -31,6 +37,8 @@ List<SingleChildWidget> providers = [
       create: (_) => AnnouncementsProviderClass()),
   ChangeNotifierProvider<PresentsProviderClass>(
       create: (_) => PresentsProviderClass()),
+  ChangeNotifierProvider<MembersProviderClass>(
+      create: (_) => MembersProviderClass()),
   ChangeNotifierProvider<LocationProviderClass>(
       create: (_) => LocationProviderClass()),
 ];
@@ -74,36 +82,55 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        backgroundColor: Colors.white,
-        appBarTheme: const AppBarTheme(
-          elevation: 0,
-          titleTextStyle: TextStyle(
-              color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20),
-          iconTheme: IconThemeData(color: Colors.black),
-          color: Colors.white,
-        ),
-        fontFamily: 'Gotham',
-        dialogTheme: DialogTheme(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-          titleTextStyle: const TextStyle(
-              fontFamily: '', fontWeight: FontWeight.bold, color: Colors.black),
-          contentTextStyle: const TextStyle(
-            fontFamily: '',
-            color: Colors.black,
+    // SystemChrome.setSystemUIOverlayStyle(
+    //   SystemUiOverlayStyle(statusBarColor: Colors.transparent),
+    // );
+    FocusScope.of(context).unfocus();
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent, // transparent status bar
+        // systemNavigationBarColor: Colors.black, // navigation bar color
+        // statusBarIconBrightness: Brightness.dark, // status bar icons' color
+        // systemNavigationBarIconBrightness:
+        //     Brightness.dark, //navigation bar icons' color
+      ),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          scaffoldBackgroundColor: Colors.white,
+          backgroundColor: Colors.white,
+          appBarTheme: AppBarTheme(
+            elevation: 0,
+            titleTextStyle: TextStyle(
+                color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20),
+            iconTheme: IconThemeData(color: Colors.black),
+            color: Colors.white,
+          ),
+          fontFamily: 'Gotham',
+          dialogTheme: DialogTheme(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            titleTextStyle: const TextStyle(
+                fontFamily: 'Gotham',
+                fontWeight: FontWeight.bold,
+                color: Colors.black),
+            contentTextStyle: const TextStyle(
+              fontFamily: 'Gotham',
+              color: Colors.black,
+            ),
           ),
         ),
+        builder: EasyLoading.init(
+          builder: (context, child) {
+            // EasyLoading.instance.customAnimation!.buildWidget();
+            return ScrollConfiguration(
+              behavior: MyBehavior(),
+              child: child!,
+            );
+          },
+        ),
+        home: const Splash(),
       ),
-      builder: (context, child) {
-        return ScrollConfiguration(
-          behavior: MyBehavior(),
-          child: child!,
-        );
-      },
-      home: const Splash(),
     );
   }
 }

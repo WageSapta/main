@@ -1,5 +1,5 @@
 name: ekskul
-description: A new Flutter project.
+description: App for absent extracuricular.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -27,14 +27,22 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  anim_search_bar: ^2.0.3
   animations: ^2.0.3
   carousel_slider: ^4.1.1
+  cloud_firestore: ^4.3.1
   crypto: ^3.0.2
   dropdown_button2: ^1.7.1
   email_validator: ^2.1.17
+  firebase_auth: ^4.2.5
+  firebase_core: ^2.4.1
+  firebase_storage: ^11.0.10
   flutter:
     sdk: flutter
+  flutter_easyloading: ^3.0.5
   flutter_local_notifications: ^9.7.0
+  flutter_localizations:
+    sdk: flutter
   fluttertoast: ^8.1.2
   geolocator: ^9.0.1
   google_maps_flutter: ^2.2.0
